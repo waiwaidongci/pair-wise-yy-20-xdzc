@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>传统戏曲锣鼓经排练可视化</title>
+  <title>传统戏曲锣鼓经排练台 · 乐师席位与替班</title>
   <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
   <main class="app">
     <header class="top">
       <div>
-        <p>Luogujing Rehearsal Grid</p>
-        <h1>传统戏曲锣鼓经排练可视化</h1>
+        <p>Luogujing Rehearsal Desk</p>
+        <h1>锣鼓经排练台 · 乐师席位与临时替班</h1>
       </div>
       <div class="transport">
         <button id="playBtn" type="button">播放</button>
@@ -22,7 +22,24 @@
 
     <section class="controls">
       <label>剧目片段<input id="pieceName" placeholder="如：出场锣鼓-慢起"></label>
-      <label>速度BPM<input id="bpmInput" type="number" min="40" max="220" value="96"></label>
+      <label>当前速度BPM<input id="bpmInput" type="number" min="40" max="220" value="96"></label>
+      <label>基准BPM
+        <span class="inline-field"><strong id="baselineText">96</strong><button id="resetTempoBtn" class="ghost" type="button">恢复基准</button></span>
+      </label>
+      <label>排练厅
+        <select id="hallSelect">
+          <option value="h1">一号排练厅</option>
+          <option value="h2">二号排练厅</option>
+        </select>
+      </label>
+      <label>当前小节
+        <select id="measureSelect">
+          <option value="1">第1小节</option>
+          <option value="2">第2小节</option>
+          <option value="3">第3小节</option>
+          <option value="4">第4小节</option>
+        </select>
+      </label>
       <label>循环小节
         <select id="loopSelect">
           <option value="">全段</option>
@@ -32,25 +49,59 @@
           <option value="3">第4小节</option>
         </select>
       </label>
-      <label>难点批注<input id="noteInput" placeholder="如：第2小节小锣晚半拍"></label>
+      <label>难点批注<input id="noteInput" placeholder="如：第2小节小锣晚半拍（回车提交）"></label>
+      <label class="toggle-label"><input id="soloMode" type="checkbox"> 独奏口令标注模式（再点有字节拍标注「独」）</label>
     </section>
+
+    <div id="banner" class="banner hidden"></div>
+    <div id="toast" class="toast hidden" role="status"></div>
 
     <section class="stage">
       <aside class="segments">
         <h2>已存方案</h2>
         <div id="savedList"></div>
+        <h2 class="with-actions">
+          冲突清单（拒绝结果）
+          <button id="clearConflictsBtn" class="ghost small" type="button">清空已读</button>
+        </h2>
+        <div id="conflictList"></div>
       </aside>
-      <section class="score">
-        <div id="grid" class="grid"></div>
+
+      <section class="score-col">
+        <section class="score">
+          <div id="grid" class="grid"></div>
+          <p class="hint">普通模式点击节拍切换锣鼓字；勾选「独奏口令标注模式」后，点有字节拍标注/取消独奏。速度偏离基准超过 5% 即视为偏离。</p>
+        </section>
+
+        <section class="board">
+          <div class="board-head">
+            <h2>乐师席位排班 · <span id="boardHallName">一号排练厅</span></h2>
+            <button id="rearrangeBtn" class="danger" type="button" disabled>执行整段重排</button>
+          </div>
+          <div id="seatBoard" class="seat-board"></div>
+
+          <h2>待接班确认（替班自下一小节起）</h2>
+          <div id="pendingList"></div>
+        </section>
       </section>
+
       <aside class="notes">
         <h2>段落结构</h2>
         <div id="structure"></div>
+
         <h2>批注</h2>
         <div id="notesList"></div>
+
+        <h2>乐师到场与履历</h2>
+        <div class="hint">更正当前小节到场记录后，依赖它的席位立即失效并重算，旧安排封存可查。</div>
+        <div id="roster"></div>
       </aside>
     </section>
   </main>
+
+  <script src="./js/rules.js"></script>
+  <script src="./js/store.js"></script>
+  <script src="./js/view.js"></script>
   <script src="./app.js"></script>
 </body>
 </html>

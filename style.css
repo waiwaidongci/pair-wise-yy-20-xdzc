@@ -75,6 +75,30 @@ button {
   cursor: pointer;
 }
 
+button.ghost {
+  min-height: 30px;
+  border: 1px solid var(--line);
+  background: white;
+  color: var(--ink);
+  padding: 0 10px;
+  font-size: 13px;
+}
+
+button.ghost.small {
+  min-height: 28px;
+  padding: 0 8px;
+  font-size: 12px;
+}
+
+button.danger {
+  background: var(--accent);
+}
+
+button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
 .transport {
   display: flex;
   gap: 8px;
@@ -82,13 +106,28 @@ button {
 
 .controls {
   display: grid;
-  grid-template-columns: minmax(220px, 1fr) 120px 130px minmax(260px, 1fr);
+  grid-template-columns: minmax(200px, 1fr) 120px 170px 140px 130px 120px minmax(220px, 1fr) minmax(240px, 1.4fr);
   gap: 10px;
   margin-bottom: 14px;
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--panel);
   padding: 12px;
+  align-items: end;
+}
+
+.toggle-label {
+  align-items: center;
+}
+
+.toggle-label input {
+  width: auto;
+}
+
+.inline-field {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 label {
@@ -231,3 +270,368 @@ select {
     flex-direction: column;
   }
 }
+
+/* ---------- 状态横幅 / 提示 ---------- */
+
+.banner {
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-bottom: 12px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.banner.warn {
+  border: 1px solid var(--gold);
+  background: #fdf3dd;
+  color: #7a5a12;
+}
+
+.banner.danger {
+  border: 1px solid var(--accent);
+  background: #fbe3e4;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.hint {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+  margin: 8px 2px 0;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.toast {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 20;
+  max-width: 420px;
+  border-radius: 8px;
+  padding: 12px 16px;
+  color: white;
+  font-size: 14px;
+  line-height: 1.5;
+  box-shadow: 0 12px 30px rgb(0 0 0 / 22%);
+}
+
+.toast.ok {
+  background: var(--active);
+}
+
+.toast.fail {
+  background: var(--accent);
+}
+
+/* ---------- 独奏口令 ---------- */
+
+.cell.solo {
+  position: relative;
+}
+
+.cell.solo .token {
+  color: var(--accent);
+}
+
+.solo-badge {
+  position: absolute;
+  top: 2px;
+  right: 4px;
+  font-size: 11px;
+  font-weight: 900;
+  color: white;
+  background: var(--accent);
+  border-radius: 4px;
+  padding: 0 4px;
+  line-height: 16px;
+}
+
+.measure-solo {
+  display: block;
+  font-size: 10px;
+  color: var(--accent);
+  font-weight: 800;
+}
+
+.chip {
+  display: inline-block;
+  border-radius: 4px;
+  padding: 1px 6px;
+  font-size: 11px;
+  font-weight: 800;
+  margin-right: 4px;
+  white-space: nowrap;
+}
+
+.chip.normal {
+  background: #dcebe5;
+  color: var(--active);
+}
+
+.chip.sub {
+  background: #f5e5c4;
+  color: #8a6210;
+}
+
+.chip.reject {
+  background: #f6dadd;
+  color: var(--accent);
+}
+
+.chip.warn {
+  background: #fdf0d2;
+  color: #8a6210;
+  margin-left: 6px;
+}
+
+.chip.archived {
+  background: #e9e3da;
+  color: var(--muted);
+}
+
+/* ---------- 席位排班表 ---------- */
+
+.score-col {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+}
+
+.board {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgb(255 250 242 / 94%);
+  box-shadow: 0 18px 42px rgb(83 57 29 / 10%);
+  padding: 14px;
+}
+
+.board-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.seat-board {
+  display: grid;
+  grid-template-columns: 72px repeat(4, minmax(150px, 1fr));
+  gap: 8px;
+  margin: 12px 0 18px;
+}
+
+.seat-corner,
+.seat-measure,
+.seat-label {
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  font-size: 13px;
+  color: var(--muted);
+  background: #f4ead9;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 6px;
+}
+
+.seat-measure {
+  flex-direction: column;
+  gap: 2px;
+}
+
+.seat-label {
+  background: #f8f2e7;
+  color: var(--ink);
+}
+
+.seat-cell {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: white;
+  padding: 8px;
+  min-height: 96px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.seat-cell.occupied {
+  background: #f2f8f4;
+  border-color: #b8d3cb;
+}
+
+.seat-cell.occupied.is-sub {
+  background: #fdf6e7;
+  border-color: #e2c58d;
+}
+
+.seat-cell .seat-who {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+
+.seat-cell small {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.seat-tag {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.bind-form,
+.sub-form {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  margin-top: auto;
+}
+
+.bind-form select,
+.sub-form select {
+  padding: 6px;
+  font-size: 12px;
+}
+
+.bind-form.disabled,
+.sub-form.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* ---------- 待接班 / 冲突 ---------- */
+
+.with-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.pending-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: white;
+  padding: 10px;
+  margin-bottom: 8px;
+}
+
+.pending-item p {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.conflict-item {
+  border: 1px solid #e7c0c2;
+  border-left: 4px solid var(--accent);
+  border-radius: 6px;
+  background: white;
+  padding: 8px 10px;
+  margin-bottom: 8px;
+}
+
+.conflict-item header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+}
+
+.conflict-item time {
+  margin-left: auto;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.conflict-item p {
+  margin: 6px 0;
+  font-size: 12px;
+  color: var(--ink);
+}
+
+.conflict-item ul {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--accent);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+/* ---------- 乐师履历 ---------- */
+
+.musician-card {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: white;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.musician-card header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.musician-card small {
+  color: var(--muted);
+  font-size: 11px;
+  text-align: right;
+}
+
+.att-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 8px 0;
+}
+
+.att {
+  min-height: 28px;
+  padding: 0 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  border: 1px solid var(--line);
+}
+
+.att.present {
+  background: #e3f0ea;
+  color: var(--active);
+}
+
+.att.absent {
+  background: #f6dadd;
+  color: var(--accent);
+}
+
+.resume {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--ink);
+}
+
+.resume em {
+  color: var(--muted);
+  font-style: normal;
+}
+
+.resume time {
+  color: var(--muted);
+  font-size: 11px;
+}
+

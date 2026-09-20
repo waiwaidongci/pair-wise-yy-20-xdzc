@@ -1,0 +1,9 @@
+{
+  "name": "luogujing-rehearsal-desk",
+  "version": "2.0.0",
+  "private": true,
+  "description": "传统戏曲锣鼓经排练台：乐师席位与临时替班闭环（规则 / 存储 / 展示三模块）",
+  "scripts": {
+    "test": "node test/rules.test.js && node test/store.test.js && node test/view.smoke.js"
+  }
+}
