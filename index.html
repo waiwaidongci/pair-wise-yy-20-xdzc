@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>传统戏曲锣鼓经排练可视化</title>
+  <title>传统戏曲锣鼓经排练可视化 · 乐师席位台</title>
   <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
@@ -33,6 +33,12 @@
         </select>
       </label>
       <label>难点批注<input id="noteInput" placeholder="如：第2小节小锣晚半拍"></label>
+      <div class="control-extra">
+        <label class="solo-toggle"><input type="checkbox" id="soloToggle">独奏口令标记模式（勾选后点格子）</label>
+        <button id="setBaseBtn" type="button" class="ghost-btn">将当前速度设为基准</button>
+        <span>基准：<strong id="baseBpmValue">96</strong> BPM</span>
+        <span id="tempoBadge" class="tempo-badge ok">速度在基准区间</span>
+      </div>
     </section>
 
     <section class="stage">
@@ -50,7 +56,9 @@
         <div id="notesList"></div>
       </aside>
     </section>
+
+    <section id="seatDesk" class="seat-desk"></section>
   </main>
-  <script src="./app.js"></script>
+  <script type="module" src="./app.js"></script>
 </body>
 </html>
